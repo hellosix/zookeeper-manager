@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>zk admin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<link href="../vender/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" charset="utf-8" />
+<link rel="stylesheet" href="../vender/jstree/dist/themes/default/style.min.css" />
+<link href="../css/common.css" rel="stylesheet" charset="utf-8" />
+<!-- 4 include the jQuery library -->
+<script src="../vender/jQuery/jquery-2.2.3.min.js"></script>
+<script src="../vender/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<!-- 5 include the minified jstree source -->
+<script src="../vender/jstree/dist/jstree.min.js"></script>
+<style>
+    div.input-group > .glyphicon-search{
+        top:0px;
+    }
+
+    .right-content > .panel-footer{
+        background-color: #fafbfc;
+        border-color: #e1e4e8;
+    }
+
+    pre {padding: 5px; margin: 0px; margin-bottom: 15px }
+    .string { color: green; }
+    .number { color: darkorange; }
+    .boolean { color: blue; }
+    .null { color: magenta; }
+    .key { color: red; }
+
+    #input-path{
+        width: 300px;
+    }
+</style>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <!-- We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns. -->
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/index"><span class="glyphicon glyphicon-home"></span> Home</a>
+        </div>
+    </div>
+</nav>
+<div class="clearfix nav-height"></div>
+<div class="container-fluid container-title">
+    <div class="container-fluid container-title-content">
+        <h1>zk-admin</h1>
+        <p>zookeeper admin center</p>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-search"></span>
+                        <input type="text" class="form-control" id="search-node" placeholder="Search" />
+                    </div>
+                    <div id="jstree"></div>
+                </div>
+            </div>
+        </div><!-- .col-md-2 -->
+        <div class="col-md-9">
+            <div class="panel panel-default right-content">
+                <div class="panel-heading">
+                    <span>Path:</span><span id="zk-path"></span>
+                </div>
+                <div class="panel-body">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active">
+                            <pre id="node-detail"></pre>
+                            <div class="node-value text-value">
+                                <textarea class="form-control node-value" rows="3" id="node-data"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="form-inline">
+                        <div class="form-group form-group-sm">
+                            <input id="input-path" type="text" class="form-control col-xs-6" placeholder="/" />
+                        </div>
+                        <button id="delete-node" type="button" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-remove"></i> Delete</button>
+                        <button id="save-node" type="button" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-ok"></i> save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .row -->
+</div><!-- .container-fluid -->
+
+<script src="../js/common.js"></script>
+<script src="../js/index.js"></script>
+<script th:inline="JavaScript">
+    /*<![CDATA[*/
+
+    /*]]>*/
+</script>
+</body>
+</html>
