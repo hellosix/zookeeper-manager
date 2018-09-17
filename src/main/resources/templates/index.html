@@ -1,104 +1,116 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>zk admin</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Zookeeper Manager</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../lib/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap Reset -->
+    <link href="../lib/flatlab-admin/css/style.css" rel="stylesheet" />
+    <!-- Your custom styles (optional) -->
+    <link href="../lib/flatlab-admin/css/bootstrap-reset.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../lib/jsTree/themes/default/style.css" />
+    <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="../lib/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+    <link href="../lib/codemirror/codemirror.css" rel="stylesheet" />
+    <link href="../css/style.css" rel="stylesheet" />
+
 </head>
-<link href="../vender/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" charset="utf-8" />
-<link rel="stylesheet" href="../vender/jstree/dist/themes/default/style.min.css" />
-<link href="../css/common.css" rel="stylesheet" charset="utf-8" />
-<!-- 4 include the jQuery library -->
-<script src="../vender/jQuery/jquery-2.2.3.min.js"></script>
-<script src="../vender/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
-<!-- 5 include the minified jstree source -->
-<script src="../vender/jstree/dist/jstree.min.js"></script>
-<style>
-    div.input-group > .glyphicon-search{
-        top:0px;
-    }
 
-    .right-content > .panel-footer{
-        background-color: #fafbfc;
-        border-color: #e1e4e8;
-    }
-
-    pre {padding: 5px; margin: 0px; margin-bottom: 15px }
-    .string { color: green; }
-    .number { color: darkorange; }
-    .boolean { color: blue; }
-    .null { color: magenta; }
-    .key { color: red; }
-
-    #input-path{
-        width: 300px;
-    }
-</style>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <!-- We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns. -->
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/index"><span class="glyphicon glyphicon-home"></span> Home</a>
-        </div>
+<!--header start-->
+<header class="header">
+    <!--logo start-->
+    <a href="#" class="logo" >Zookeeper Manager</a>
+    <!--logo end-->
+    <div class="other">
+        <span class="new-address" >New Address</span>
     </div>
-</nav>
-<div class="clearfix nav-height"></div>
-<div class="container-fluid container-title">
-    <div class="container-fluid container-title-content">
-        <h1>zk-admin</h1>
-        <p>zookeeper admin center</p>
+    <div class="right">
+        <select class="selectpicker"  data-live-search="true" title="Choose one of the address">
+        </select>
     </div>
-</div>
-<div class="container-fluid">
+</header>
+<!--header end-->
+
+<section class="wrapper">
     <div class="row">
+        <div class="col-4 col-lg-4 col-sm-4">
+            <section class="panel">
+                <div class="panel-body">
+                    <!--<h4>Zookeeper Nodes</h4>-->
+                    <div class="form-group">
+                        <input type="input" class="form-control" id="search-node" placeholder="search...">
+                    </div>
+                    <div id="myTree"></div>
+                </div>
+            </section>
 
-        <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="input-group">
-                        <span class="input-group-addon glyphicon glyphicon-search"></span>
-                        <input type="text" class="form-control" id="search-node" placeholder="Search" />
-                    </div>
-                    <div id="jstree"></div>
-                </div>
-            </div>
-        </div><!-- .col-md-2 -->
-        <div class="col-md-9">
-            <div class="panel panel-default right-content">
-                <div class="panel-heading">
-                    <span>Path:</span><span id="zk-path"></span>
-                </div>
-                <div class="panel-body">
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active">
-                            <pre id="node-detail"></pre>
-                            <div class="node-value text-value">
-                                <textarea class="form-control node-value" rows="3" id="node-data"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-footer">
-                    <div class="form-inline">
-                        <div class="form-group form-group-sm">
-                            <input id="input-path" type="text" class="form-control col-xs-6" placeholder="/" />
-                        </div>
-                        <button id="delete-node" type="button" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-remove"></i> Delete</button>
-                        <button id="save-node" type="button" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-ok"></i> save</button>
-                    </div>
-                </div>
-            </div>
         </div>
-    </div><!-- .row -->
-</div><!-- .container-fluid -->
+        <div class="col-8 col-lg-8 col-sm-8">
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="path-container">Current Path:&nbsp;&nbsp;<span class="current-path" id="current-path"></span></div>
+                    <div class="margin-bottom">
+                        <pre class="detail" id="node-detail"></pre>
+                    </div>
+                    <div class="margin-bottom">
+                        <textarea class="form-control data" cols="60" rows="5" id="node-data"></textarea>
+                    </div>
+                    <div class="margin-bottom">
+                        <div class="col-lg-6 path-input-container">
+                            <input type="text" class="form-control" id="input-path"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <button type="button" class="btn btn-primary " id="save-node"><i class="icon-repeat"></i> Save</button>
+                            <button type="button" class="btn btn-danger" id="delete-node"><i class="icon-trash"></i> Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
 
-<script src="../js/common.js"></script>
-<script src="../js/index.js"></script>
-<script th:inline="JavaScript">
-    /*<![CDATA[*/
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">×
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Enter Zookeeper Address
+                </h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control" id="address-input" placeholder="127.0.0.1:2181"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="confirm">Confirm</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
-    /*]]>*/
-</script>
+
+
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="../lib/jquery/jquery-3.3.1.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="../lib/bootstrap-3.3.7/js/bootstrap.js"></script>
+<script type="text/javascript" src="../lib/layer/layer.js"></script>
+<script type="text/javascript" src="../lib/jsTree/jstree.js"></script>
+<script type="text/javascript" src="../lib/bootstrap-select/js/bootstrap-select.js" ></script>
+<script type="text/javascript" src="../lib/codemirror/codemirror.js" ></script>
+<script type="text/javascript" src="../lib/codemirror/xml.js" ></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/script.js"></script>
 </body>
+
 </html>

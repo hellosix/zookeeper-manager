@@ -1,11 +1,10 @@
 package com.lzz.util;
 
-import com.lzz.model.ZKnode;
-import net.sf.json.JSONObject;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.RetryNTimes;
 import org.apache.zookeeper.data.Stat;
+import org.hellosix.zookeeper.entity.ZKNode;
 
 import java.util.List;
 
@@ -76,7 +75,7 @@ public class CuratorClientTest {
         String d = String.valueOf(client.getData().forPath("/zktest/node1/nn2"));
         byte[] datas = client.getData().forPath("/zktest/node1/nn2");
         System.out.println(new String(datas));
-        JSONObject jsonObject = JSONObject.fromObject(stat);
+        //JSONObject jsonObject = JSONObject.parseObject(stat);
         //System.out.println( jsonObject );
         /*
         // 2.4 Remove node
@@ -87,12 +86,12 @@ public class CuratorClientTest {
         */
     }
 
-    private static void getPath(CuratorFramework client, ZKnode zKnode) throws Exception {
+    private static void getPath(CuratorFramework client, ZKNode zKnode) throws Exception {
         String path = zKnode.getId();
         List<String> paths =  client.getChildren().forPath( path );
         for( int i = 0; i < paths.size(); i++ ){
-            List<ZKnode> zKnodeChildren = zKnode.getChildren();
-            ZKnode temZknode = new ZKnode();
+            List<ZKNode> zKnodeChildren = zKnode.getChildren();
+            ZKNode temZknode = new ZKNode();
             String childrenPath;
             if( "/".equals( path ) ){
                 childrenPath = path + paths.get(i);
