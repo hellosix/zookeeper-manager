@@ -1,8 +1,8 @@
-package org.hellosix.zookeeper.service;
+package cn.hellosix.zookeeper.service;
 
+import cn.hellosix.zookeeper.entity.ZKParam;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.curator.framework.CuratorFramework;
-import org.hellosix.zookeeper.entity.ZKParam;
 
 /**
  * @author: Jay.H.Zou

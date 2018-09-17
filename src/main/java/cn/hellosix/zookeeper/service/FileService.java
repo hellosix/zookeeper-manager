@@ -1,4 +1,4 @@
-package org.hellosix.zookeeper.service;
+package cn.hellosix.zookeeper.service;
 
 /**
  * 下载、上传文件

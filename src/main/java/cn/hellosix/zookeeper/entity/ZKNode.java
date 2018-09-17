@@ -1,4 +1,4 @@
-package org.hellosix.zookeeper.entity;
+package cn.hellosix.zookeeper.entity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.hellosix.zookeeper.entity;
+package cn.hellosix.zookeeper.entity;
 
 /**
  * @author: George.Z.Lin, Jay.H.Zou

@@ -1,8 +1,8 @@
-package org.hellosix.zookeeper.controller;
+package cn.hellosix.zookeeper.controller;
 
+import cn.hellosix.zookeeper.service.IZKService;
 import com.alibaba.fastjson.JSONObject;
-import org.hellosix.zookeeper.entity.ZKParam;
-import org.hellosix.zookeeper.service.IZKService;
+import cn.hellosix.zookeeper.entity.ZKParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

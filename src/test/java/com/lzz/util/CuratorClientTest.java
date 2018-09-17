@@ -4,7 +4,7 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.RetryNTimes;
 import org.apache.zookeeper.data.Stat;
-import org.hellosix.zookeeper.entity.ZKNode;
+import cn.hellosix.zookeeper.entity.ZKNode;
 
 import java.util.List;
 
