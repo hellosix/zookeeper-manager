@@ -1,4 +1,4 @@
-# zk-manager
+# zookeeper-manager
 > zookeeper 管理平台
 
 ### 简介
