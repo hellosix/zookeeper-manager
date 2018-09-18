@@ -20,6 +20,10 @@ button {
     font-weight: 300;
 }
 
+#current-address {
+	margin-bottom: 20px;
+}
+
 .right {
 	float: right;
 	margin: 13px 0;

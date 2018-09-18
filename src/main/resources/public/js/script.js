@@ -12,6 +12,7 @@ $(function () {
     } else {
         window.address = address;
         addAddressList(window.address);
+        $("#current-address").text(window.address);
     }
 
     getAddressList();
