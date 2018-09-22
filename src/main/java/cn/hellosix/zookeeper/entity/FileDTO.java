@@ -14,6 +14,13 @@ import java.nio.file.Path;
 @Builder
 @Getter
 public final class FileDTO {
+    /**
+     * 文件路径
+     */
     private Path path;
-    
+
+    /**
+     * 文件名称
+     */
+    private String name;
 }
