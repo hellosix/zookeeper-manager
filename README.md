@@ -21,3 +21,6 @@
 ### 4. 删除节点
 <img src="./docs/delete.png" />  
 
+### 5. cookie 存储近期访问的 zookeeper 列表
+<img src="./docs/address-list.png" />  
+
