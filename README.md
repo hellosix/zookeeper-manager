@@ -1,9 +1,23 @@
-# zookeeper-manager
+# zookeeper-manager 
 > zookeeper 管理平台
+
+<img src="./docs/index.png" />
 
 ### 简介
 
-      利用 jstree 实现 znode 的显示，并支持增删改，可以方便的管理 zookeeper,详情参考下图：
-      
-<img src="./docs/zookeeper-manager.png" />      
-         
+使用 apache curator 结合前端 jstree 实现对 zookeeper node 可视化的增、删、查、改，可以方便的管理 zookeeper
+
+### 1. 添加 zookeeper 地址
+<img src="./docs/enter-address.png" />  
+
+### 2. 数据展示
+<img src="./docs/show.png" />  
+
+### 3. 更新节点
+
+用户可以更新节点或添加新节点
+<img src="./docs/save.png" />  
+
+### 4. 删除节点
+<img src="./docs/delete.png" />  
+
