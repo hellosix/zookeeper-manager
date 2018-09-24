@@ -1,5 +1,6 @@
 # zookeeper-manager 
-> zookeeper 管理平台
+> zookeeper 管理平台,支持 znode的增删改
+> 如果该工具对您有帮助，可以给我们个 star 支持一下 谢谢！ ^_^ , 使用过程中如果有问题或者建议可以给我们提 issue
 
 <img src="./docs/index.png" />
 
