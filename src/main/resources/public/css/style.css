@@ -20,19 +20,17 @@ button {
     font-weight: 300;
 }
 
-#current-address {
-	margin-bottom: 20px;
+.between {
+	display: flex;
+	justify-content: space-between;
 }
 
-.right {
-	float: right;
+.margin-13 {
 	margin: 13px 0;
 }
 
-.other {
-	float: right;
-	line-height: 60px;
-	margin: 0 20px;
+#current-address {
+	margin-bottom: 20px;
 }
 
 .node-selected {
@@ -99,10 +97,10 @@ button {
 	cursor: pointer;
 	color: #ffffff;
 	padding: 5px;
+	margin-right: 15px;
 	border-radius: 4px;
 	border: 1px solid;
 }
-
 
 body .my-skin .layui-layer-btn .layui-layer-btn0{
 	background-color: #ff6c60;

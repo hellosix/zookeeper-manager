@@ -35,10 +35,10 @@ public class IndexController {
     @Autowired
     private IZKService zkService;
 
-    @Autowired
-    private IFileService fileService;
+   /* @Autowired
+    private IFileService fileService;*/
 
-    @RequestMapping("/")
+    @RequestMapping("/zookeeper")
     public String treeAdmin() {
         return "index";
     }
@@ -97,7 +97,7 @@ public class IndexController {
         return res;
     }
 
-    @GetMapping(value = "/download")
+    /*@GetMapping(value = "/download")
     public ResponseEntity<Resource> download(@RequestParam String address,
                                              @RequestParam(value = "path", defaultValue = Constants.QUERY_PARAM_PATH_PREFIX) String path) {
         //创建参数实例
@@ -120,5 +120,5 @@ public class IndexController {
             log.error("下载异常", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    }*/
 }

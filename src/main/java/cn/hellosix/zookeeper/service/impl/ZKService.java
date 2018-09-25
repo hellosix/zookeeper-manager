@@ -6,6 +6,8 @@ import cn.hellosix.zookeeper.entity.ZKParam;
 import cn.hellosix.zookeeper.service.IZKService;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -23,13 +25,15 @@ import java.util.List;
 @Service
 public class ZKService implements IZKService {
 
+    private static final Log logger = LogFactory.getLog(ZKService.class);
+
     @Override
     public CuratorFramework getClient(String zkAddress) {
         if (StringUtils.isBlank(zkAddress)) {
             return null;
         }
         // TODO: 策略，需要研究一下
-        RetryPolicy retryPolicy = new RetryNTimes(10, 5000);
+        RetryPolicy retryPolicy = new RetryNTimes(3, 5000);
         // TODO: 参数写配置文件
         CuratorFramework client = CuratorFrameworkFactory
                 .builder()
@@ -57,7 +61,7 @@ public class ZKService implements IZKService {
         try {
             getPath(client, node, false);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Get all path error.", e);
             return new JSONObject();
         } finally {
             closeClient(client);
@@ -132,7 +136,7 @@ public class ZKService implements IZKService {
                 data = new String(bytes);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Get data error.", e);
         } finally {
             closeClient(client);
         }
@@ -151,9 +155,10 @@ public class ZKService implements IZKService {
             Stat stat = client.checkExists().forPath(zkPath);
             byte[] bytes = client.getData().forPath(zkPath);
             jsonObject.put(Constants.STAT, stat);
+            System.out.println(new String(bytes));
             jsonObject.put(Constants.DATA, new String(bytes));
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Get detail error.", e);
             jsonObject.put(Constants.DATA, e.getMessage());
         } finally {
             closeClient(client);
@@ -186,7 +191,7 @@ public class ZKService implements IZKService {
             jsonObject.put(Constants.STAT, resultStat);
             jsonObject.put(Constants.DATA, new String(resultData));
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Update node error.", e);
         } finally {
             closeClient(client);
         }
@@ -204,7 +209,7 @@ public class ZKService implements IZKService {
             client.delete().deletingChildrenIfNeeded().forPath(param.getZkPath());
             isSuccess = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Remove node error.", e);
         } finally {
             closeClient(client);
         }

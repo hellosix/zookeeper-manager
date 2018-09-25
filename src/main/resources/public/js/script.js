@@ -5,10 +5,10 @@ $(function () {
 
     var address = getUrlParam('address');
     if(isEmpty(address) || !isValidAddress(address)){
-        layer.msg("Zookeeper address is null or not correct!");
-        $('#myModal').modal({
+        layer.msg("Zookeeper address is null or incorrect!");
+        /*$('#myModal').modal({
             keyboard: true
-        });
+        });*/
     } else {
         window.address = address;
         addAddressList(window.address);
@@ -22,46 +22,49 @@ $(function () {
         path = "/";
     }
 
-    $('#myTree').jstree({
-        "core" : {
-            "animation" : 0,
-            "check_callback" : true,
-            "themes" : { "stripes" : false },
-            'data' : {
-                'url' : function (node) {
-                    return '/getAllPath?address=' + window.address + '&path=' + path;
-                },
-                'data' : function (node) {
-                    return { 'id' : node.id };
+    if(!isEmpty(window.address)) {
+        $('#myTree').jstree({
+            "core" : {
+                "animation" : 0,
+                "check_callback" : true,
+                "themes" : { "stripes" : false },
+                'data' : {
+                    'url' : function (node) {
+                        return '/getAllPath?address=' + window.address + '&path=' + path;
+                    },
+                    'data' : function (node) {
+                        return { 'id' : node.id };
+                    }
                 }
-            }
-        },
-        "types" : {
-            "default" : {
-                "icon" : "glyphicon glyphicon-flash"
             },
-            "leaf" : {
-                "icon" : "glyphicon glyphicon-flash"
+            "types" : {
+                "default" : {
+                    "icon" : "glyphicon glyphicon-flash"
+                },
+                "leaf" : {
+                    "icon" : "glyphicon glyphicon-flash"
+                },
+                "tempLeaf" : {
+                    "icon" : "glyphicon glyphicon-flash"
+                },
+                "ellipsis" : {
+                    "icon" : "glyphicon glyphicon-flash"
+                },
+                "parent" : {
+                    "icon" : "glyphicon glyphicon-ok"
+                }
             },
-            "tempLeaf" : {
-                "icon" : "glyphicon glyphicon-flash"
-            },
-            "ellipsis" : {
-                "icon" : "glyphicon glyphicon-flash"
-            },
-            "parent" : {
-                "icon" : "glyphicon glyphicon-ok"
-            }
-        },
-        "plugins" : [ "search","types","state" ]
-    });
+            "plugins" : [ "search","types","state" ]
+        });
+    }
+
 
     $('#myTree').on("changed.jstree", function (e, data) {
         var path = data.selected[0];
         $("#input-path").val(path);
         $("#current-path").text(path);
         $.get("/getPathDetail?address=" + window.address + "&path=" + path,function(data){
-            $("#node-detail").html(syntaxHighlight(data));
+            $("#node-detail").html(syntaxHighlight(data.stat));
             $("#node-data").val(data.data);
             /*if (!isEmpty(data.data) && path.indexOf(".xml") != -1)  {
                 var editor = CodeMirror.fromTextArea(document.getElementById("#node-data"), {
@@ -100,10 +103,10 @@ $(function () {
         if (isEmpty(address)) {
             layer.msg("Address can't be null!");
         } else if (!isValidAddress(address)) {
-            layer.msg("Address is not correct!");
+            layer.msg("Address is incorrect!");
         } else {
             window.address = address;
-            window.location.href= window.location.href.split('?')[0] + '?address=' + window.address + '&path=' + path;
+            window.location.href= window.location.href.split('?')[0] + '?address=' + window.address;
         }
     });
 
