@@ -1,3 +1,4 @@
+/*
 package cn.hellosix.zookeeper.service.impl;
 
 import cn.hellosix.zookeeper.entity.Constants;
@@ -20,33 +21,41 @@ import java.nio.file.StandardOpenOption;
 import java.util.Comparator;
 import java.util.concurrent.TimeUnit;
 
+*/
 /**
  * 下载、上传文件实现
  *
  * @author Zenuo
  * @date 2018/9/22
- */
+ *//*
+
 @Service
 @Slf4j
 public final class FileService implements IFileService {
 
-    /**
+    */
+/**
      * ZK服务实例
-     */
+     *//*
+
     @NonNull
     private final IZKService zkService;
 
-    /**
+    */
+/**
      * 暂存目录
      * todo 根据配置文件读取暂存目录
-     */
+     *//*
+
     private final Path tempDir = Paths.get(System.getProperty("java.io.tmpdir"), "zookeeper-manager");
 
-    /**
+    */
+/**
      * 构造方法
      *
      * @param zkService ZK服务，由Spring注入
-     */
+     *//*
+
     public FileService(@Autowired IZKService zkService) {
         //创建暂存目录
         makeTempDir();
@@ -61,9 +70,11 @@ public final class FileService implements IFileService {
         log.info("初始化完成");
     }
 
-    /**
+    */
+/**
      * {@inheritDoc}
-     */
+     *//*
+
     @Override
     public FileDTO download(ZKParam param, Boolean recursive) throws Exception {
         //获取客户端实例
@@ -94,9 +105,11 @@ public final class FileService implements IFileService {
         }
     }
 
-    /**
+    */
+/**
      * 创建暂存目录
-     */
+     *//*
+
     private void makeTempDir() {
         //尝试创建
         final boolean mkdirs = tempDir.toFile().mkdirs();
@@ -112,9 +125,11 @@ public final class FileService implements IFileService {
         }
     }
 
-    /**
+    */
+/**
      * 删除暂存目录
-     */
+     *//*
+
     private void deleteTempDir() {
         try {
             //遍历目录
@@ -134,9 +149,11 @@ public final class FileService implements IFileService {
         }
     }
 
-    /**
+    */
+/**
      * 刪除过期的暂存文件
-     */
+     *//*
+
     private void deleteExpiredTempFile() {
         while (!Thread.currentThread().isInterrupted()) {
             //当前时间毫秒数
@@ -161,3 +178,4 @@ public final class FileService implements IFileService {
         }
     }
 }
+*/
