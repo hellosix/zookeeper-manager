@@ -13,16 +13,6 @@ $(function () {
         window.address = address;
         addAddressList(window.address);
         $("#current-address").text(window.address);
-    }
-
-    getAddressList();
-
-    var path = getUrlParam('path');
-    if( isEmpty(path)){
-        path = "/";
-    }
-
-    if(!isEmpty(window.address)) {
         $('#myTree').jstree({
             "core" : {
                 "animation" : 0,
@@ -58,6 +48,12 @@ $(function () {
         });
     }
 
+    getAddressList();
+
+    var path = getUrlParam('path');
+    if( isEmpty(path)){
+        path = "/";
+    }
 
     $('#myTree').on("changed.jstree", function (e, data) {
         var path = data.selected[0];
