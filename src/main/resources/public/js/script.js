@@ -13,6 +13,16 @@ $(function () {
         window.address = address;
         addAddressList(window.address);
         $("#current-address").text(window.address);
+    }
+
+    getAddressList();
+
+    var path = getUrlParam('path');
+    if( isEmpty(path)){
+        path = "/";
+    }
+    
+    if(!isEmpty(window.address)) {
         $('#myTree').jstree({
             "core" : {
                 "animation" : 0,
@@ -46,13 +56,6 @@ $(function () {
             },
             "plugins" : [ "search","types","state" ]
         });
-    }
-
-    getAddressList();
-
-    var path = getUrlParam('path');
-    if( isEmpty(path)){
-        path = "/";
     }
 
     $('#myTree').on("changed.jstree", function (e, data) {
@@ -112,7 +115,7 @@ $(function () {
             layer.msg("Address can't be null!")
         } else {
             window.address = address;
-            window.location.href= window.location.href.split('?')[0] + '?address=' + window.address + '&path=' + path;
+            window.location.href= window.location.href.split('?')[0] + '?address=' + window.address;
         }
     });
 });
