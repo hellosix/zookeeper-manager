@@ -90,7 +90,6 @@ $(function () {
 
 function initTree() {
     if(!isEmpty(window.address)) {
-        console.log("init")
         $('#myTree').jstree({
             "core" : {
                 "animation" : 0,
