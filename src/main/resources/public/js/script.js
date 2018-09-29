@@ -83,7 +83,7 @@ $(function () {
             layer.msg("Address can't be null!");
         } else {
             window.address = address;
-            window.location.href= window.location.href.split('?')[0] + '?address=' + window.address + '&path=' + window.path;
+            window.location.href= window.location.href.split('?')[0] + '?address=' + window.address;
         }
     });
 });
