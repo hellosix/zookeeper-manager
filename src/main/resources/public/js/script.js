@@ -19,45 +19,12 @@ $(function () {
 
     var path = getUrlParam('path');
     if( isEmpty(path)){
-        path = "/";
+        window.path = "/";
+    } else {
+        window.path = path;
     }
 
-    if(!isEmpty(window.address)) {
-        $('#myTree').jstree({
-            "core" : {
-                "animation" : 0,
-                "check_callback" : true,
-                "themes" : { "stripes" : false },
-                'data' : {
-                    'url' : function (node) {
-                        return '/getAllPath?address=' + window.address + '&path=' + path;
-                    },
-                    'data' : function (node) {
-                        return { 'id' : node.id };
-                    }
-                }
-            },
-            "types" : {
-                "default" : {
-                    "icon" : "glyphicon glyphicon-flash"
-                },
-                "leaf" : {
-                    "icon" : "glyphicon glyphicon-flash"
-                },
-                "tempLeaf" : {
-                    "icon" : "glyphicon glyphicon-flash"
-                },
-                "ellipsis" : {
-                    "icon" : "glyphicon glyphicon-flash"
-                },
-                "parent" : {
-                    "icon" : "glyphicon glyphicon-ok"
-                }
-            },
-            "plugins" : [ "search","types","state" ]
-        });
-    }
-
+    initTree();
 
     $('#myTree').on("changed.jstree", function (e, data) {
         var path = data.selected[0];
@@ -113,13 +80,52 @@ $(function () {
     $("body").delegate(".text", "click", function () {
         var address = $(this).text();
         if (isEmpty(address)) {
-            layer.msg("Address can't be null!")
+            layer.msg("Address can't be null!");
         } else {
             window.address = address;
-            window.location.href= window.location.href.split('?')[0] + '?address=' + window.address + '&path=' + path;
+            window.location.href= window.location.href.split('?')[0] + '?address=' + window.address + '&path=' + window.path;
         }
     });
 });
+
+function initTree() {
+    if(!isEmpty(window.address)) {
+        console.log("init")
+        $('#myTree').jstree({
+            "core" : {
+                "animation" : 0,
+                "check_callback" : true,
+                "themes" : { "stripes" : false },
+                'data' : {
+                    'url' : function (node) {
+                        return '/getAllPath?address=' + window.address + '&path=' + window.path;
+                    },
+                    'data' : function (node) {
+                        return { 'id' : node.id };
+                    }
+                }
+            },
+            "types" : {
+                "default" : {
+                    "icon" : "glyphicon glyphicon-flash"
+                },
+                "leaf" : {
+                    "icon" : "glyphicon glyphicon-flash"
+                },
+                "tempLeaf" : {
+                    "icon" : "glyphicon glyphicon-flash"
+                },
+                "ellipsis" : {
+                    "icon" : "glyphicon glyphicon-flash"
+                },
+                "parent" : {
+                    "icon" : "glyphicon glyphicon-ok"
+                }
+            },
+            "plugins" : [ "search","types","state" ]
+        });
+    }
+}
 
 var flag = false;
 // 搜索框
@@ -143,9 +149,14 @@ $("#save-node").on("click", function () {
         data : JSON.stringify(param),
         dataType:'json',
         success : function(data){
-            $("#node-detail").html(syntaxHighlight(data));
-            window.location.reload();
-            layer.msg("Update Success!");
+            layer.msg("Update Success! Please refresh the page.");
+            initTree();
+            $("#node-detail").html(syntaxHighlight(data.stat));
+            $("#node-data").val(data.data);
+
+        },
+        error: function (e) {
+            layer.msg("Update failed!");
         }
     });
 });
