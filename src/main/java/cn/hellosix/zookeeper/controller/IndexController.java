@@ -1,29 +1,17 @@
 package cn.hellosix.zookeeper.controller;
 
 import cn.hellosix.zookeeper.entity.Constants;
-import cn.hellosix.zookeeper.entity.FileDTO;
 import cn.hellosix.zookeeper.entity.ZKParam;
-import cn.hellosix.zookeeper.service.IFileService;
 import cn.hellosix.zookeeper.service.IZKService;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.ContentDisposition;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.io.FileInputStream;
-import java.nio.charset.StandardCharsets;
 
 /**
  * Created by lzz on 17/5/7.
