@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2018/9/22
  */
 
-@Service
+
 public class FileService2 implements IFileService2 {
 
     private static final Log logger = LogFactory.getLog(FileService2.class);
