@@ -10,7 +10,7 @@ import java.util.zip.ZipOutputStream;
  * @author Jay.H.Zou
  * @date 2018/10/24
  */
-public class ZipUtils {
+public class ZipUtilsCopy {
 
     private static final int BUFFER_SIZE = 2 * 1024;
 
@@ -34,7 +34,7 @@ public class ZipUtils {
             long end = System.currentTimeMillis();
             System.out.println("压缩完成，耗时：" + (end - start) + " ms");
         } catch (Exception e) {
-            throw new RuntimeException("zip error from ZipUtils", e);
+            throw new RuntimeException("zip error from ZipUtilsCopy", e);
         } finally {
             if (zos != null) {
                 try {
@@ -72,7 +72,7 @@ public class ZipUtils {
             long end = System.currentTimeMillis();
             System.out.println("压缩完成，耗时：" + (end - start) + " ms");
         } catch (Exception e) {
-            throw new RuntimeException("zip error from ZipUtils", e);
+            throw new RuntimeException("zip error from ZipUtilsCopy", e);
         } finally {
             if (zos != null) {
                 try {
@@ -141,13 +141,13 @@ public class ZipUtils {
     public static void main(String[] args) throws Exception {
         /** 测试压缩方法1  */
         FileOutputStream fos1 = new FileOutputStream(new File("c:/mytest01.zip"));
-        ZipUtils.toZip("D:/log", fos1, true);
+        ZipUtilsCopy.toZip("D:/log", fos1, true);
         /** 测试压缩方法2  */
         List<File> fileList = new ArrayList<>();
         fileList.add(new File("D:/Java/jdk1.7.0_45_64bit/bin/jar.exe"));
         fileList.add(new File("D:/Java/jdk1.7.0_45_64bit/bin/java.exe"));
         FileOutputStream fos2 = new FileOutputStream(new File("c:/mytest02.zip"));
-        ZipUtils.toZip(fileList, fos2);
+        ZipUtilsCopy.toZip(fileList, fos2);
     }
 
 }
