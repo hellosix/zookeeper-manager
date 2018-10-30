@@ -24,7 +24,7 @@ import java.nio.charset.StandardCharsets;
 public class FileService2Test {
 
     @Autowired
-    private IFileService2 service;
+    private IFileService2 fileService2;
 
     @Test
     public void download() throws Exception {
@@ -33,7 +33,7 @@ public class FileService2Test {
         param.setZkAddress("127.0.0.1:2181");
         param.setZkPath("/zookeeper/test/test1");
         //调用
-        final FileDTO fileDTO = service.download(param, false);
+        final FileDTO fileDTO = fileService2.download(param, false);
         //断言
         //Assert.assertTrue(fileDTO.getPath().toFile().exists());
     }
