@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import java.nio.file.*;
 
 /**
  * 判断系统环境，根据系统环境创建相应的 zookeeper-manager-data 目录
@@ -17,47 +18,48 @@ import java.nio.charset.Charset;
 public class FileUtils {
 
     /**
-     * 写单个文件或创建文件夹
+     * 创建文件夹
      *
-     * @param origin
-     * @param path
+     * @param fileDir
+     * @throws Exception
      */
-    public static void writeFile(String origin, String path) {
-        FileOutputStream fos = null;
-        try {
-
-            fos = new FileOutputStream(new File(path));
-            FileChannel channel = fos.getChannel();
-            ByteBuffer src = Charset.forName("utf8").encode("你好你好你好你好你好");
-            // 字节缓冲的容量和limit会随着数据长度变化，不是固定不变的
-            System.out.println("初始化容量和limit：" + src.capacity() + ","
-                    + src.limit());
-            int length = 0;
-
-            while ((length = channel.write(src)) != 0) {
-                /*
-                 * 注意，这里不需要clear，将缓冲中的数据写入到通道中后 第二次接着上一次的顺序往下读
-                 */
-                System.out.println("写入长度:" + length);
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+    public static void mkdir(String fileDir) throws Exception {
+        Path path = Paths.get(fileDir);
+        boolean pathExists = Files.exists(path, new LinkOption[]{ LinkOption.NOFOLLOW_LINKS});
+        if(!pathExists) {
+            path.toFile().mkdirs();
         }
     }
 
-    public static void zip(String path) {
+    /**
+     * 写单个文件
+     *
+     * @param originData
+     * @param filePath
+     */
+    public static void writeFile(byte[] originData, String filePath) throws IOException {
+        // "data/logging.properties"
+        Path path = Paths.get(filePath);
+        boolean pathExists = Files.exists(path, new LinkOption[]{ LinkOption.NOFOLLOW_LINKS});
+        if (!pathExists) {
+            Files.write(
+                    path,
+                    originData,
+                    StandardOpenOption.TRUNCATE_EXISTING
+            );
+        }
+    }
 
+    public static void zip(String fileDir) throws Exception{
+        //fileDir为zip文件的绝对路径
+        Path zipFilePath = Paths.get(fileDir);
+        //创建一个zip的文件系统
+        FileSystem fs = FileSystems.newFileSystem(zipFilePath, null);
+        //在zip包中的路径
+        Path pathInZipfile = fs.getPath("/hello.text");
+        // log.info("delete an entry from ZIP File" + pathInZipfile.toUri() );
+        Files.delete(pathInZipfile);
+        fs.close();
     }
 
     public static void deleteFileDir(String path) {
