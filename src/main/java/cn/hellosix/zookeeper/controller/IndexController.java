@@ -85,28 +85,4 @@ public class IndexController {
         return res;
     }
 
-    /*@GetMapping(value = "/download")
-    public ResponseEntity<Resource> download(@RequestParam String address,
-                                             @RequestParam(value = "path", defaultValue = Constants.QUERY_PARAM_PATH_PREFIX) String path) {
-        //创建参数实例
-        final ZKParam param = new ZKParam();
-        param.setZkAddress(address);
-        param.setZkPath(path);
-        try {
-            //调用下载服务
-            final FileDTO fileDTO = fileService.download(param, false);
-            //内容布置
-            final String contentDisposition = ContentDisposition.builder(Constants.CONTENT_DISPOSITION_TYPE)
-                    .filename(fileDTO.getName().replaceAll("/", "_"), StandardCharsets.UTF_8)
-                    .build().toString();
-            //返回
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
-                    .header(HttpHeaders.CONTENT_TYPE, Constants.CONTENT_TYPE_APPLICATION_OCTET_STREAM)
-                    .body(new InputStreamResource(new FileInputStream(fileDTO.getPath().toFile())));
-        } catch (Exception e) {
-            log.error("下载异常", e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }*/
 }
