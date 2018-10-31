@@ -42,6 +42,7 @@ public class FileUtils {
         Path path = Paths.get(filePath);
         boolean pathExists = Files.exists(path, new LinkOption[]{ LinkOption.NOFOLLOW_LINKS});
         if (!pathExists) {
+            Files.createFile(path);
             Files.write(
                     path,
                     originData,
