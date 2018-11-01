@@ -51,19 +51,4 @@ public class FileUtils {
         }
     }
 
-    public static void zip(String fileDir) throws Exception{
-        //fileDir为zip文件的绝对路径
-        Path zipFilePath = Paths.get(fileDir);
-        //创建一个zip的文件系统
-        FileSystem fs = FileSystems.newFileSystem(zipFilePath, null);
-        //在zip包中的路径
-        Path pathInZipfile = fs.getPath("/hello.text");
-        // log.info("delete an entry from ZIP File" + pathInZipfile.toUri() );
-        Files.delete(pathInZipfile);
-        fs.close();
-    }
-
-    public static void deleteFileDir(String path) {
-
-    }
 }

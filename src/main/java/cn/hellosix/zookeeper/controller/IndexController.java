@@ -2,9 +2,11 @@ package cn.hellosix.zookeeper.controller;
 
 import cn.hellosix.zookeeper.entity.Constants;
 import cn.hellosix.zookeeper.entity.ZKParam;
+import cn.hellosix.zookeeper.service.IFileService;
 import cn.hellosix.zookeeper.service.IZKService;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 /**
  * Created by lzz on 17/5/7.
@@ -23,8 +31,8 @@ public class IndexController {
     @Autowired
     private IZKService zkService;
 
-   /* @Autowired
-    private IFileService fileService;*/
+    @Autowired
+    private IFileService fileService;
 
     @RequestMapping("/zookeeper")
     public String treeAdmin() {
@@ -85,28 +93,31 @@ public class IndexController {
         return res;
     }
 
-    /*@GetMapping(value = "/download")
-    public ResponseEntity<Resource> download(@RequestParam String address,
-                                             @RequestParam(value = "path", defaultValue = Constants.QUERY_PARAM_PATH_PREFIX) String path) {
-        //创建参数实例
-        final ZKParam param = new ZKParam();
+    @RequestMapping(value = "/download", method = RequestMethod.POST)
+    public void download(HttpServletRequest request, HttpServletResponse response, String address, String nodePath) {
+        response.setCharacterEncoding(request.getCharacterEncoding());
+        response.setContentType("application/octet-stream");
+        ZKParam param = new ZKParam();
         param.setZkAddress(address);
-        param.setZkPath(path);
+        param.setZkPath(nodePath);
+        String zipName = fileService.download(param);
+        FileInputStream fis = null;
         try {
-            //调用下载服务
-            final FileDTO fileDTO = fileService.download(param, false);
-            //内容布置
-            final String contentDisposition = ContentDisposition.builder(Constants.CONTENT_DISPOSITION_TYPE)
-                    .filename(fileDTO.getName().replaceAll("/", "_"), StandardCharsets.UTF_8)
-                    .build().toString();
-            //返回
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
-                    .header(HttpHeaders.CONTENT_TYPE, Constants.CONTENT_TYPE_APPLICATION_OCTET_STREAM)
-                    .body(new InputStreamResource(new FileInputStream(fileDTO.getPath().toFile())));
+            File file = new File(zipName);
+            fis = new FileInputStream(file);
+            response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
+            IOUtils.copy(fis, response.getOutputStream());
+            response.flushBuffer();
         } catch (Exception e) {
-            log.error("下载异常", e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-    }*/
+    }
 }

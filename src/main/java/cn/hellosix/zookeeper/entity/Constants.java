@@ -43,10 +43,14 @@ public class Constants {
      * 暂存文件超时毫秒数
      */
     public static final long TEMP_FILE_EXPIRE_TIME_IN_MILLISECONDS = TEMP_FILE_EXPIRE_TIME_IN_MINUTES * 60 * 1000L;
-    /**
-     * 内容类型，应用八进制流
-     */
-    public static final String CONTENT_TYPE_APPLICATION_OCTET_STREAM = "application/octet-stream";
+
+    public static final String ZOOKEEPER = "zookeeper";
+
+    public static final String _FILE = "_file";
+
+    public static final String ROOT_PATH = "data/";
+
+    public static final String ZIP = ".zip";
 
     private Constants() {
     }

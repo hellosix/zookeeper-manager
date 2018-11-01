@@ -69,6 +69,12 @@
                         </div>
                         <div class="col-lg-6">
                             <button type="button" class="btn btn-primary " id="save-node"><i class="icon-repeat"></i> Save</button>
+                            <button type="button" class="btn btn-success " id="down-node"><i class="icon-repeat"></i> Down</button>
+                            <form action="/download" method="post" target="targetIfr" id="download" style="display: none;">
+                                <input type="text" name="nodePath" id="nodePath" value="" />
+                                <input type="text" name="address" id="address" value="" />
+                            </form>
+                            <iframe name="targetIfr" style="display: none"></iframe>
                             <button type="button" class="btn btn-danger" id="delete-node"><i class="icon-trash"></i> Delete</button>
                         </div>
                     </div>

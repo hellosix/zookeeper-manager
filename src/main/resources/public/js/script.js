@@ -160,6 +160,19 @@ $("#save-node").on("click", function () {
     });
 });
 
+$("#down-node").on("click", function () {
+    $("#address").val(window.address);
+    var path = $("#current-path").text();
+    if(!isEmpty(path) &&  !isEmpty(window.address)) {
+        $("#nodePath").val(path);
+        var down = $("#download");
+        down.submit();
+    } else {
+        layer.msg("Zookeeper node path is null.");
+    }
+
+});
+
 $("#delete-node").on("click", function () {
     var param = {};
     var path = $("#input-path").val().trim();

@@ -1,5 +1,6 @@
 package cn.hellosix.zookeeper.utils;
 
+import cn.hellosix.zookeeper.entity.Constants;
 import cn.hellosix.zookeeper.service.IZKService;
 import org.apache.curator.framework.CuratorFramework;
 import org.junit.Test;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -47,8 +49,6 @@ public class FileUtilsTest {
         if (childrenList == null || childrenList.isEmpty()) {
             if (data != null) {
                 FileUtils.writeFile(data, downDir + parentDir);
-            } else {
-                // TODO: 创建一个空文件夹
             }
         } else {
             // 认为此节点可能是文件夹，并创建文件夹
@@ -67,6 +67,19 @@ public class FileUtilsTest {
             }
         }
 
+    }
+
+    @Test
+    public void zip() throws IOException {
+
+        /*String targetFolderPath = Constants.ROOT_PATH + "conf";
+        String newZipFilePath = Constants.ROOT_PATH + "conf.zip";
+
+        //将目标目录的文件压缩成Zip文件
+        CompressUtils.compress(targetFolderPath , newZipFilePath);*/
+
+        String root = "/";
+        System.out.println(root.split("/").length);
     }
 
 
