@@ -9,6 +9,9 @@ import cn.hellosix.zookeeper.utils.FileUtils;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.apache.curator.framework.CuratorFramework;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -23,18 +26,23 @@ import java.util.concurrent.*;
  * @date 2018/10/15
  */
 @Service
-public class FileService implements IFileService {
+public class FileService implements IFileService, ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private IZKService zkService;
 
-    private static final ExecutorService executorService = new ThreadPoolExecutor(
+    private static ExecutorService executorService = new ThreadPoolExecutor(
             5,
             5,
             60L,
             TimeUnit.SECONDS, new SynchronousQueue<>(),
             new ThreadFactoryBuilder().setNameFormat("Write File pool-thread-%d").build(),
             new ThreadPoolExecutor.CallerRunsPolicy());
+
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        executorService = Executors.newFixedThreadPool(1);
+    }
 
 
     @Override
