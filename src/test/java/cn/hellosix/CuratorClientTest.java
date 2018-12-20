@@ -1,4 +1,4 @@
-package com.lzz.util;
+package cn.hellosix;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;

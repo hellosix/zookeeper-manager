@@ -23,9 +23,6 @@ public class IndexController {
     @Autowired
     private IZKService zkService;
 
-   /* @Autowired
-    private IFileService fileService;*/
-
     @RequestMapping("/zookeeper")
     public String treeAdmin() {
         return "index";
