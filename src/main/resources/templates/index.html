@@ -9,15 +9,14 @@
     <!-- Bootstrap core CSS -->
     <link href="../lib/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet">
     <!-- Bootstrap Reset -->
-    <link href="../lib/flatlab-admin/css/style.css" rel="stylesheet" />
+    <link href="../lib/flatlab-admin/css/style.css" rel="stylesheet"/>
     <!-- Your custom styles (optional) -->
-    <link href="../lib/flatlab-admin/css/bootstrap-reset.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../lib/jsTree/themes/default/style.css" />
-    <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="../lib/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
-    <link href="../lib/codemirror/codemirror.css" rel="stylesheet" />
-    <link href="../css/style.css" rel="stylesheet" />
-
+    <link href="../lib/flatlab-admin/css/bootstrap-reset.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../lib/jsTree/themes/default/style.css"/>
+    <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link href="../lib/bootstrap-select/css/bootstrap-select.css" rel="stylesheet"/>
+    <link href="../lib/codemirror/codemirror.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -25,12 +24,12 @@
 <header class="header">
     <div class="between">
         <!--logo start-->
-        <a href="#" class="logo" >Zookeeper Manager</a>
+        <a href="#" class="logo">Zookeeper Manager</a>
         <!--logo end-->
         <div class="between margin-13">
-            <span class="new-address" >New Address</span>
+            <span class="new-address">New Address</span>
             <div class="">
-                <select class="selectpicker"  data-live-search="true" title="Choose one of the address">
+                <select class="selectpicker" data-live-search="true" title="Choose one of the address">
                 </select>
             </div>
         </div>
@@ -44,7 +43,7 @@
             <section class="panel">
                 <div class="panel-body">
                     <!--<h4>Zookeeper Nodes</h4>-->
-                    <h4 id="current-address" ></h4>
+                    <h4 id="current-address"></h4>
                     <div class="form-group">
                         <input type="input" class="form-control" id="search-node" placeholder="search...">
                     </div>
@@ -56,7 +55,17 @@
         <div class="col-8 col-lg-8 col-sm-8">
             <section class="panel">
                 <div class="panel-body">
-                    <div class="path-container">Current Path:&nbsp;&nbsp;<span class="current-path" id="current-path"></span></div>
+                    <div class="path-container">Current Path:&nbsp;&nbsp;
+                        <span class="current-path" id="current-path"></span>
+
+                    </div>
+                    <div class="margin-bottom">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="load-file"
+                                   aria-describedby="load-file">
+                            <label class="custom-file-label" for="load-file">Choose file</label>
+                        </div>
+                    </div>
                     <div class="margin-bottom">
                         <pre class="detail" id="node-detail"></pre>
                     </div>
@@ -68,8 +77,15 @@
                             <input type="text" class="form-control" id="input-path"/>
                         </div>
                         <div class="col-lg-6">
-                            <button type="button" class="btn btn-primary " id="save-node"><i class="icon-repeat"></i> Save</button>
-                            <button type="button" class="btn btn-danger" id="delete-node"><i class="icon-trash"></i> Delete</button>
+                            <button type="button" class="btn btn-primary " id="save-node"><i class="icon-repeat"></i>
+                                Save
+                            </button>
+                            <button type="button" class="btn btn-info " id="download-node"><i
+                                    class="icon-file-text"></i> Download
+                            </button>
+                            <button type="button" class="btn btn-danger" id="delete-node"><i class="icon-trash"></i>
+                                Delete
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -101,7 +117,6 @@
 </div><!-- /.modal -->
 
 
-
 <!-- SCRIPTS -->
 <!-- JQuery -->
 <script type="text/javascript" src="../lib/jquery/jquery-3.3.1.min.js"></script>
@@ -109,9 +124,9 @@
 <script type="text/javascript" src="../lib/bootstrap-3.3.7/js/bootstrap.js"></script>
 <script type="text/javascript" src="../lib/layer/layer.js"></script>
 <script type="text/javascript" src="../lib/jsTree/jstree.js"></script>
-<script type="text/javascript" src="../lib/bootstrap-select/js/bootstrap-select.js" ></script>
-<script type="text/javascript" src="../lib/codemirror/codemirror.js" ></script>
-<script type="text/javascript" src="../lib/codemirror/xml.js" ></script>
+<script type="text/javascript" src="../lib/bootstrap-select/js/bootstrap-select.js"></script>
+<script type="text/javascript" src="../lib/codemirror/codemirror.js"></script>
+<script type="text/javascript" src="../lib/codemirror/xml.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript" src="../js/script.js"></script>
 </body>
